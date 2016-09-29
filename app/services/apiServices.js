@@ -45,9 +45,24 @@ app.service('apiServices', ['$http', '$q', 'appSettings', function ($http, $q, a
         return deferred.promise;
     };
 
+    var deleteService = function(module,parameter){
+        var deferred = $q.defer();
+        $http({
+            method: 'POST',
+            url: apiBase + module,
+            params: parameter
+        })
+            .success(function (response) {
+                deferred.resolve(response);
+            }).catch(function (data, status, headers, config) {
+            deferred.reject(data.statusText);
+        });
+        return deferred.promise;
+    };
 
     apiServices.getNoParam = getNoParam;
     apiServices.update = update;
     apiServices.create = create;
+    apiServices.delete = deleteService;
     return apiServices;
 }]);

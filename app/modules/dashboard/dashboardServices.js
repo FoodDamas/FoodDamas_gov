@@ -42,12 +42,26 @@ dashboard.service('dashboardService',['$http', '$q','apiServices',function($http
                 deferred.reject(response);
             });
         return deferred.promise;
+    };
+    var deleteAnswer = function(parameter){
+        var deferred = $q.defer();
+        apiServices.create("deleteAnswer",parameter).then(function(response){
+                if (response)
+                    deferred.resolve(response);
+                else
+                    deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+            },
+            function (response) {
+                deferred.reject(response);
+            });
+        return deferred.promise;
     }
     /*End QnAService*/
     /*QnAService*/
     dashboardService.getListQuesttion = getListQuestion;
     dashboardService.editAnswer = updateAnswer;
     dashboardService.createAnswer= createAnswer;
+    dashboardService.deleteAnswer = deleteAnswer;
     /*End QnAService*/
     return dashboardService;
 }]);
