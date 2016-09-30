@@ -1,1 +1,12 @@
 FTView
+
+
+<ul>
+    <li data-ng-repeat="menu in vm.menu">
+        <a ui-sref="home.{{menu.state}}">
+            <span>{{menu.title}}</span>
+        </a>
+    </li>
+</ul>
+
+<ui-view></ui-view>

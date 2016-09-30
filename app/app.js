@@ -21,14 +21,11 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', functio
             adminsite :true
         });
 
-    $urlRouterProvider.otherwise('ftview');
+    $urlRouterProvider.otherwise('/page');
 
 }]);
 app.run(['$rootScope', '$location','$cookies','$state',function($rootScope, $location,$cookies,$state) {
     $rootScope.$on("$stateChangeStart", function(event,toState, toParams, fromState, fromParams){
-      /*  console.log(toState.adminsite);
-        console.log(toState.authenticate);
-        console.log(!toState.authenticate && !$cookies.get("user"));*/
         if(toState.adminsite)
         {
            /* console.log(toState.adminsite);*/

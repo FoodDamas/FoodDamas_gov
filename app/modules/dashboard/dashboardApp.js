@@ -23,15 +23,7 @@ dashboard.config(["$stateProvider", function ($stateProvider) {
         authenticate: true,
         adminsite :true
     });
-    $stateProvider.state('app.qna.create', {
-        url: '/Create',
-        templateUrl: 'app/modules/dashboard/views/NewQnA.html',
-        controller: 'QnACtrl',
-        controllerAs: 'vm',
-        authenticate: true,
-        adminsite :true
 
-    });
     //Notice page state
     $stateProvider.state('app.notice', {
         url: '/Notice',
