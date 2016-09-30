@@ -12,7 +12,6 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashbo
             dashboardService.getlistNotice().then(function (data) {
                 var d = JSON.parse(angular.toJson(data));
                 vm.getData = d;
-                console.log(vm.getData);
             });
         };
         vm.getData = vm.getFunc();
@@ -82,61 +81,61 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashbo
         temp.type = data.type;
     }
     vm.save = function(data){
-
-        console.log(data);
         var param ={
             id:data.id,
             title:data.title,
             content:data.content,
             type:data.type
         }
-        console.log(param);
         dashboardService.updateNotce(param).then(function(data){
             if (data.result == "success") {
                 $state.reload();
             }
         })
     }
-    vm.delete = function(data){
-        console.log(data)
-        ModalService.showModal({
-            templateUrl: 'modal.html',
-            controller: "ModalController"
-        }).then(function (modal) {
-            modal.element.modal();
-            modal.close.then(function (result) {
-                if (result == "Yes") {
-                    var param = {
-                        id: data
-                    }
-                    dashboardService.deleteNotice(param).then(function(data){
-                        if (data.result == "success") {
-                            $state.reload();
+    /*Delete Notice*/
+    {
+        vm.delete = function(data){
+            ModalService.showModal({
+                templateUrl: 'modal.html',
+                controller: "ModalController"
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    if (result == "Yes") {
+                        var param = {
+                            id: data
                         }
-                    })
-                }
+                        dashboardService.deleteNotice(param).then(function(data){
+                            if (data.result == "success") {
+                                $state.reload();
+                            }
+                        })
+                    }
+                });
             });
-        });
 
+        };
     }
-    vm.createNew = function(data){
-        if('type' in data){
-            var param = {
-                title : data.title,
-                content :data.content,
-                type :data.type
-            }
-            dashboardService.createNotice(param).then(function(data){
-                if (data.result == "success") {
-                    $state.reload();
+    /*Create Notice*/
+    {
+        vm.createNew = function (data) {
+            if ('type' in data) {
+                var param = {
+                    title: data.title,
+                    content: data.content,
+                    type: data.type
                 }
-            })
-        }else {
-            console.log("no");
-            vm.addNoticeError = "Please Select Type For Notice";
-        }
-        console.log(data);
+                dashboardService.createNotice(param).then(function (data) {
+                    if (data.result == "success") {
+                        $state.reload();
+                    }
+                })
+            } else {
+                vm.addNoticeError = "Please Select Type For Notice";
+            }
 
+        }
     }
     vm.cancelEdit = function(){
         vm.noticeEdit=!vm.noticeEdit;
@@ -144,7 +143,7 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashbo
         vm.getNotice.content = temp.content;
         vm.getNotice.type = temp.type;
     }
-    console.log("Notice Page Ctrl.............");
+    /*console.log("Notice Page Ctrl.............");*/
 })
 
 {
