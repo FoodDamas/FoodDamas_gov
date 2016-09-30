@@ -1,91 +1,78 @@
 /**
  * Created by Mr_Quang on 9/24/2016.
  */
-dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll){
+dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashboardService,$state,ModalService){
     var vm =this;
-    vm.orderByField = '';
-    vm.reverseSort =false;
+
     $scope.pageSize =5;
     vm.viewNoticeDetail=false;
-    vm.notices = [
-        {
-            id:1,
-            title:"Notice Title #1",
-            content:"Notice Content 1",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:2,
-            title:"Notice Title #2",
-            content:"Notice Content 2",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:3,
-            title:"Notice Title #3",
-            content:"Notice Content 3",
-            date:"2016-09-27",
-            type:"warning"
-        },
-        {
-            id:4,
-            title:"Notice Title #4",
-            content:"Notice Content 4",
-            date:"2016-09-27",
-            type:"important"
-        },
-        {
-            id:5,
-            title:"Notice Title #5",
-            content:"Notice Content 5",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:6,
-            title:"Notice Title #6",
-            content:"Notice Content 6",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:7,
-            title:"Notice Title #7",
-            content:"Notice Content 7",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:8,
-            title:"Notice Title #8",
-            content:"Notice Content 8",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:9,
-            title:"Notice Title #9",
-            content:"Notice Content 9",
-            date:"2016-09-27",
-            type:"info"
-        },
-        {
-            id:10,
-            title:"Notice Title #10",
-            content:"Notice Content 10",
-            date:"2016-09-27",
-            type:"info"
+    /*---------------------------Init----------------------*/
+    {
+        vm.getFunc = function () {
+            dashboardService.getlistNotice().then(function (data) {
+                var d = JSON.parse(angular.toJson(data));
+                vm.getData = d;
+                console.log(vm.getData);
+            });
+        };
+        vm.getData = vm.getFunc();
+    }
+    /*----------------Button Click to create part----------*/
+    {
+        vm.gotoCreate = function(){
+            $location.hash('create');
+            $anchorScroll();
         }
-    ];
-    vm.gotoCreate = function(){
-        $location.hash('create');
-        $anchorScroll();
+    }
+    /*----------------OrderBy------------------------------*/
+    {
+        vm.sortid =false;vm.sorttitle=false;
+        vm.sorttype = false;vm.sortdate=false;
+        vm.orderByField = '';
+        vm.reverseSort =false;
+        vm.sortFunc = function(data){
+            switch (data){
+                case "id":
+                    {
+                        vm.sortid =true;
+                        vm.sorttitle=false;
+                        vm.sorttype = false;
+                        vm.sortdate=false;
+                        break;
+                    }
+                case "title":
+                    {
+                        vm.sortid =false;
+                        vm.sorttitle=true;
+                        vm.sorttype = false;
+                        vm.sortdate=false;
+                        break;
+                    }
+                case "type":
+                    {
+                        vm.sortid =false;
+                        vm.sorttitle=false;
+                        vm.sorttype = true;
+                        vm.sortdate=false;
+                        break;
+                    }
+                case "date":
+                    {
+                        vm.sortid =false;
+                        vm.sorttitle=false;
+                        vm.sorttype = false;
+                        vm.sortdate=true;
+                        break;
+                    }
+            }
+
+            vm.orderByField =data;
+            vm.reverseSort =!vm.reverseSort;
+        }
     }
     vm.noticeEdit =false;
     vm.getNotice ={};
-
+    vm.newNotice ={};
     var temp ={};
     vm.noticeView = function(data){
         vm.viewNoticeDetail =true;
@@ -93,9 +80,64 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll){
         temp.title = data.title;
         temp.content = data.content;
         temp.type = data.type;
+    }
+    vm.save = function(data){
+
+        console.log(data);
+        var param ={
+            id:data.id,
+            title:data.title,
+            content:data.content,
+            type:data.type
+        }
+        console.log(param);
+        dashboardService.updateNotce(param).then(function(data){
+            if (data.result == "success") {
+                $state.reload();
+            }
+        })
+    }
+    vm.delete = function(data){
+        console.log(data)
+        ModalService.showModal({
+            templateUrl: 'modal.html',
+            controller: "ModalController"
+        }).then(function (modal) {
+            modal.element.modal();
+            modal.close.then(function (result) {
+                if (result == "Yes") {
+                    var param = {
+                        id: data
+                    }
+                    dashboardService.deleteNotice(param).then(function(data){
+                        if (data.result == "success") {
+                            $state.reload();
+                        }
+                    })
+                }
+            });
+        });
 
     }
+    vm.createNew = function(data){
+        if('type' in data){
+            var param = {
+                title : data.title,
+                content :data.content,
+                type :data.type
+            }
+            dashboardService.createNotice(param).then(function(data){
+                if (data.result == "success") {
+                    $state.reload();
+                }
+            })
+        }else {
+            console.log("no");
+            vm.addNoticeError = "Please Select Type For Notice";
+        }
+        console.log(data);
 
+    }
     vm.cancelEdit = function(){
         vm.noticeEdit=!vm.noticeEdit;
         vm.getNotice.title = temp.title;
@@ -104,3 +146,14 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll){
     }
     console.log("Notice Page Ctrl.............");
 })
+
+{
+    /*---------------------Modal Controller---------------------*/
+    dashboard.controller('ModalController', function ($scope, close) {
+
+        $scope.close = function (result) {
+            close(result, 500); // close, but give 500ms for bootstrap to animate
+        };
+
+    });
+}

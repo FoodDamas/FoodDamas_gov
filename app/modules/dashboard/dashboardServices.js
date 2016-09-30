@@ -4,64 +4,132 @@
 dashboard.service('dashboardService',['$http', '$q','apiServices',function($http, $q,apiServices){
     var dashboardService ={};
     /*QnA Service*/
-    var getListQuestion = function(){
-        var deferred = $q.defer();
-        apiServices.getNoParam("listQuestion2").then(function(response){
-            if(response)
-                deferred.resolve(response);
-            else
-                deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
-            },
-            function (response) {
-                deferred.reject(response);
-            });
-        return deferred.promise;
-    };
-    var updateAnswer = function(parameters){
-        var deferred = $q.defer();
-        apiServices.update("editAnswer",parameters).then(function(response){
-                if (response)
-                    deferred.resolve(response);
-                else
-                    deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
-            },
-            function (response) {
-                deferred.reject(response);
-            });
-        return deferred.promise;
-    };
-    var createAnswer = function(parameters){
-        var deferred = $q.defer();
-        apiServices.create("addNewAnswer",parameters).then(function(response){
-                if (response)
-                    deferred.resolve(response);
-                else
-                    deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
-            },
-            function (response) {
-                deferred.reject(response);
-            });
-        return deferred.promise;
-    };
-    var deleteAnswer = function(parameter){
-        var deferred = $q.defer();
-        apiServices.create("deleteAnswer",parameter).then(function(response){
-                if (response)
-                    deferred.resolve(response);
-                else
-                    deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
-            },
-            function (response) {
-                deferred.reject(response);
-            });
-        return deferred.promise;
+    {
+        var getListQuestion = function () {
+            var deferred = $q.defer();
+            apiServices.getNoParam("listQuestion2").then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+        var updateAnswer = function (parameters) {
+            var deferred = $q.defer();
+            apiServices.update("editAnswer", parameters).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+        var createAnswer = function (parameters) {
+            var deferred = $q.defer();
+            apiServices.create("addNewAnswer", parameters).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+        var deleteAnswer = function (parameter) {
+            var deferred = $q.defer();
+            apiServices.delete("deleteAnswer", parameter).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        }
     }
     /*End QnAService*/
+    /*Notice Service*/
+    /*End Notice Service*/
+    {
+        var getList = function(){
+            var deferred = $q.defer();
+            apiServices.getNoParam("listnotice").then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+        var createNotice = function(parameters){
+            var deferred = $q.defer();
+            apiServices.create("createNotice", parameters).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+        var updateNotice = function(param){
+            var deferred = $q.defer();
+            apiServices.update("updateNotice", param).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        }
+        var deleteNotice = function(param){
+            var deferred = $q.defer();
+            apiServices.delete("deleteNotice", param).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        }
+    }
     /*QnAService*/
-    dashboardService.getListQuesttion = getListQuestion;
-    dashboardService.editAnswer = updateAnswer;
-    dashboardService.createAnswer= createAnswer;
-    dashboardService.deleteAnswer = deleteAnswer;
+    {
+        dashboardService.getListQuesttion = getListQuestion;
+        dashboardService.editAnswer = updateAnswer;
+        dashboardService.createAnswer = createAnswer;
+        dashboardService.deleteAnswer = deleteAnswer;
+    }
     /*End QnAService*/
+    /*Notice Service*/
+    {
+        dashboardService.getlistNotice = getList;
+        dashboardService.createNotice = createNotice;
+        dashboardService.updateNotce = updateNotice;
+        dashboardService.deleteNotice = deleteNotice;
+    }
+    /*End Notice Service*/
     return dashboardService;
 }]);
