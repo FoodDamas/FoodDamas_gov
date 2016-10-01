@@ -18,5 +18,11 @@ ftview.controller("ftviewCtrl",['$state',function($state){
             state:'notice'
         }
     ];
+    vm.menuclick =function(){
+        if($(window).width()<=767) {
+            console.log("yes");
+            $("#navbarMenu").click();
+        }
+    }
 
 }]);
