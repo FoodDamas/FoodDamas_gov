@@ -9,7 +9,7 @@ dashboard.config(["$stateProvider", function ($stateProvider) {
     $stateProvider.state('app.dashboard', {
         url: '/dashboard',
         templateUrl: 'app/modules/dashboard/views/DashboardHome.html',
-        controller: 'dashboardCtrl',
+        controller: 'homeCtrl',
         controllerAs: 'vm',
         authenticate: true,
         adminsite :true

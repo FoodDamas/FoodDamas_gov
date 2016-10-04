@@ -131,5 +131,46 @@ dashboard.service('dashboardService',['$http', '$q','apiServices',function($http
         dashboardService.deleteNotice = deleteNotice;
     }
     /*End Notice Service*/
+    /*DashBoard Service*/
+    {
+        var getListTotal = function () {
+            var deferred = $q.defer();
+            apiServices.getNoParam("listTotal").then(function (response) {
+                    if (response)
+                    {
+                        deferred.resolve(response);
+                    }
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+
+        var getTotalMemberByMonth = function(){
+            var deferred = $q.defer();
+            apiServices.getNoParam("memberTotalByMonth").then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        }
+    }
+    /*End of DashBoard Service*/
+    /* DashBoard Service */
+    {
+        dashboardService.getListTotal = getListTotal;
+        dashboardService.getTotalMemberByMonth = getTotalMemberByMonth;
+    }
+
+    /* End DashBoard Service */
+
     return dashboardService;
 }]);

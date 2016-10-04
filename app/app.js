@@ -17,6 +17,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', functio
             templateUrl: 'app/common/app.html',
             controller: 'appCtrl',
             controllerAs: 'vm',
+
             authenticate: true,
             adminsite :true
         });
@@ -36,20 +37,17 @@ app.run(['$rootScope', '$location','$cookies','$state',function($rootScope, $loc
                 event.preventDefault();
             }
             if(!toState.authenticate  && $cookies.get("user")){
+
                 $state.transitionTo("app.dashboard");
                 event.preventDefault();
             }
-
         }
-      /* if(!toState.adminsite)
+        if(toState.url =="/admin")
         {
-            console.log(toState.adminsite);
-            console.log(toState.authenticate);
-            if(toState.authenticate){
-                $state.transitionTo("ftview");
-                event.preventDefault();
-            }
-        }*/
+            $state.transitionTo("app.dashboard");
+            event.preventDefault();
+        }
+
 
 
 
