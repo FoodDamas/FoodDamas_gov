@@ -16,6 +16,18 @@ app.service('apiServices', ['$http', '$q', 'appSettings', function ($http, $q, a
         })
         return deferred.promise;
     };
+    var getWithParam = function(module,parameter)
+    {
+        var deferred = $q.defer();
+        $http.get(apiBase + module, { params: parameter }, { headers: { 'Content-Type': 'application/json' } })
+            .success(function (response) {
+            deferred.resolve(response);
+        }).catch(function (data, status, headers, config) { // <--- catch instead error
+            deferred.reject(data.statusText);
+        });
+
+        return deferred.promise;
+    }
     var create = function (module, parameter) {
         var deferred = $q.defer();
         $http({
@@ -61,6 +73,7 @@ app.service('apiServices', ['$http', '$q', 'appSettings', function ($http, $q, a
     };
 
     apiServices.getNoParam = getNoParam;
+    apiServices.getWithParam = getWithParam;
     apiServices.update = update;
     apiServices.create = create;
     apiServices.delete = deleteService;

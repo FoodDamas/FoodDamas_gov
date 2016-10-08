@@ -1,9 +1,9 @@
 /**
  * Created by Mr_Quang on 9/23/2016.
  */
-var dashboard = angular.module("dashboard", ['angularModalService','angular-toArrayFilter','angularUtils.directives.dirPagination','ui.router', 'ngResource', 'ngAnimate','angular-md5','ngCookies']);
+var dashboard = angular.module("dashboard", ['ngMaterial','angularModalService','angular-toArrayFilter','angularUtils.directives.dirPagination','ui.router', 'ngResource', 'ngAnimate','angular-md5','ngCookies']);
 
-dashboard.config(["$stateProvider", function ($stateProvider) {
+dashboard.config(["$stateProvider","$mdDateLocaleProvider",function ($stateProvider,$mdDateLocaleProvider,$scope) {
 
     //dashboard page state
     $stateProvider.state('app.dashboard', {
@@ -14,6 +14,23 @@ dashboard.config(["$stateProvider", function ($stateProvider) {
         authenticate: true,
         adminsite :true
     });
+    $stateProvider.state('app.foodtruck', {
+        url: '/foodtruck',
+        templateUrl: 'app/modules/dashboard/views/FoodTruckView.html',
+        controller: 'FoodTruckViewCtrl',
+        controllerAs: 'vm',
+        authenticate: true,
+        adminsite :true
+    });
+    $stateProvider.state('app.totalview', {
+        url: '/TotalView',
+        templateUrl: 'app/modules/dashboard/views/TotalView.html',
+        controller: 'TotalViewCtrl',
+        controllerAs: 'vm',
+        authenticate: true,
+        adminsite :true
+    });
+
     //QnA page state
     $stateProvider.state('app.qna', {
         url: '/QnA',
@@ -33,4 +50,8 @@ dashboard.config(["$stateProvider", function ($stateProvider) {
         authenticate: true,
         adminsite :true
     });
+
+
+
 }]);
+

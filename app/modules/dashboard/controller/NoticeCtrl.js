@@ -16,13 +16,6 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashbo
         };
         vm.getData = vm.getFunc();
     }
-    /*----------------Button Click to create part----------*/
-    {
-        vm.gotoCreate = function(){
-            $location.hash('create');
-            $anchorScroll();
-        }
-    }
     /*----------------OrderBy------------------------------*/
     {
         vm.sortid =false;vm.sorttitle=false;
@@ -69,6 +62,7 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashbo
             vm.reverseSort =!vm.reverseSort;
         }
     }
+
     vm.noticeEdit =false;
     vm.getNotice ={};
     vm.newNotice ={};
@@ -92,6 +86,13 @@ dashboard.controller("NoticeCtrl",function($scope,$location,$anchorScroll,dashbo
                 $state.reload();
             }
         })
+    }
+    /*----------------Button Click to create part----------*/
+    {
+        vm.gotoCreate = function(){
+            $location.hash('create');
+            $anchorScroll();
+        }
     }
     /*Delete Notice*/
     {

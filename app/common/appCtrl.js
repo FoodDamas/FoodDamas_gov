@@ -15,6 +15,16 @@ function ($rootScope, $scope, $state, $location, Flash,appSettings){
             state:'dashboard'
         },
         {
+            title:'Food Truck',
+            icon:'truck',
+            state:'foodtruck'
+        },
+        {
+            title:'Sale Total View',
+            icon:'money',
+            state:'totalview'
+        },
+        {
             title:"QnA",
             icon:"question-circle",
             state:"qna"

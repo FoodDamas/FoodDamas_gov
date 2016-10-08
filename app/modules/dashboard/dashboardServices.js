@@ -3,6 +3,41 @@
  */
 dashboard.service('dashboardService',['$http', '$q','apiServices',function($http, $q,apiServices){
     var dashboardService ={};
+    /*List FT*/
+    {
+        var getListFTFull = function()
+        {
+            var deferred = $q.defer();
+            apiServices.getNoParam("getFTInfoFull").then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        }
+        var getTotalListByDate = function(param){
+            var deferred = $q.defer();
+            apiServices.getWithParam("getListTotalByDate",param).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        }
+    }
+    {
+        dashboardService.getListFTFull = getListFTFull;
+        dashboardService.getTotalListByDate = getTotalListByDate;
+    }
+    /*End List FT*/
     /*QnA Service*/
     {
         var getListQuestion = function () {

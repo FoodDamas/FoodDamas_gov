@@ -1,0 +1,70 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Food Trucks Manage
+    </h1>
+    <ol class="breadcrumb">
+        <li><a><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Food Trucks View</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div id="listFoodTruckMember" style="padding-top: 1em;">
+        <!--Search With Paging-->
+        <div class="row">
+            <!--Search Input-->
+            <div class="col-xs-7 col-md-5 pull-right">
+                <div id="custom-search-input">
+                    <div class="input-group">
+                        <input type="text" class="search-query form-control" placeholder="Search"
+                               ng-model="ftviewsearch"/>
+                        <span class="input-group-btn">
+                                                 <button class="btn btn-danger" type="button">
+                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                 </button>
+                                            </span>
+                    </div>
+                </div>
+            </div>
+            <!--Paging Number-->
+            <div class="col-xs-3 col-md-2">
+                <input type="number" min="1" max="20" class="form-control"
+                       ng-model="ftviewpageSize">
+            </div>
+        </div>
+
+        <!--End Search with Paging-->
+        <div style="margin-top: 1em" class="table-responsive">
+
+            <table class="table" id="ftTable">
+                <thead class="bg-light-blue-gradient">
+                <th>No.</th>
+                <th>Food Truck ID</th>
+                <th>Owner</th>
+                <th>Food Type</th>
+                <th>Company</th>
+                <th>Register Date</th>
+                </thead>
+                <tbody>
+                <tr
+                        dir-paginate="item in vm.listFTFill | filter:ftviewsearch | itemsPerPage: ftviewpageSize">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.u_id}}</td>
+                    <td>{{item.u_name}}</td>
+                    <td>{{item.f_type}}</td>
+                    <td>{{item.co_name}}</td>
+                    <td>{{item.register_Date}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- Data Pagination Part-->
+            <div class="text-center">
+                <dir-pagination-controls boundary-links="true"
+                                         on-page-change="pageChangeHandler(newPageNumber)"
+                                         max-size="5"
+                                         template-url="app/common/dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>

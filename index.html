@@ -17,8 +17,16 @@
     <link href="css/loginpage.css" rel="stylesheet"/>
     <link href="css/QnAPage.css" rel="stylesheet"/>
     <link href="css/NoticePage.css" rel="stylesheet"/>
-
-    <link href="css/heroic-features.css" rel="stylesheet"/>
+    <link href="css/dashboard.css" rel="stylesheet"/>
+    <link href="css/angular-material.css" rel="stylesheet"/>
+ <!--   <link href="css/jquery-ui/jquery-ui.css" rel="stylesheet"/>-->
+<!--
+    &lt;!&ndash;datepicker&ndash;&gt;
+    <link href="plugins/datepicker/datepicker3.css" rel="stylesheet"/>
+-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+    <link href="css/ftviewPage.css" rel="stylesheet"/>
+    <link href="css/FoodTruckGovView.css" rel="stylesheet"/>
 
 <!--    <link href="css/jquery.dataTables.css" rel="stylesheet"/>
     <link href="css/angular-datatables.css" rel="stylesheet"/>
@@ -31,6 +39,7 @@
     <!--Script-->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwNdNHw6hANs92mf7Xd4k5-8mG5fb3Ubo"></script>
 
     <!--dataTable-->
    <!-- <script src="js/jquery.dataTables.js"></script>-->
@@ -39,11 +48,15 @@
     <script src="plugins/Chart.min.js"></script>
     <script src="js/jquery.countdownTimer.js"></script>
 
+
+    <!--DatePicker-->
+    <script src="js/moment/moment.js"></script>
+    <script src="js/moment/locale/ko.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
     <script src="js/angular/angular.min.js"></script>
-    <!--dataTable angular-->
-<!--    <script src="js/angular-datatables.min.js"></script>
-    <script src="js/dataTables.responsive.min.js"></script>
-    <script src="js/angular-datatables.bootstrap.min.js"></script>-->
+
+
 
 
     <script src="js/angular/angularModule/angular-animate.min.js"></script>
@@ -51,7 +64,7 @@
     <script src="js/angular/angularModule/angular-resource.js"></script>
     <script src="js/angular/angularModule/angular-cookies.min.js"></script>
     <script src="js/angular/angular-md5.min.js"></script>
-
+    <script src="js/angular-material.js"></script>
     <script src="js/toArrayFilter.js"></script>
 
     <!--Angular Material Library-->
@@ -91,6 +104,8 @@
         <script src="app/modules/dashboard/controller/DashBoardCtrl.js"></script>
         <script src="app/modules/dashboard/controller/NoticeCtrl.js"></script>
         <script src="app/modules/dashboard/controller/QnACtrl.js"></script>
+        <script src="app/modules/dashboard/controller/FoodTruckViewCtrl.js"></script>
+        <script src="app/modules/dashboard/controller/TotalViewCtrl.js"></script>
 
 
     <!--pagination-->

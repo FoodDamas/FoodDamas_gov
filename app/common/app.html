@@ -8,7 +8,7 @@
             <span class="logo-lg"><b>Foot Truck Dashboard</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top bg-yellow-gradient" role="navigation">
             <!-- Sidebar toggle button-->
             <a class="sidebar-toggle" data-toggle="offcanvas" role="button" data-ng-click="vm.sideBar(1);">
                 <span class="sr-only">Toggle navigation</span>
@@ -50,7 +50,7 @@
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
+    <aside class="main-sidebar ">
         <!-- sidebar -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
@@ -63,15 +63,16 @@
                     <span class="text-aqua text-sm">Administrator</span>
                 </div>
             </div>
+            <div style="padding-top: 2em"></div>
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
+          <!--  <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
                         <button type="button" name="search" id="search-btn" class="btn btn-flat" data-ng-click="vm.search();"><i class=" fa fa-search"></i></button>
                     </span>
                 </div>
-            </form>
+            </form>-->
             <!-- /.search form -->
             <ul class="sidebar-menu">
                 <li class="treeview" ui-sref-active="active" ng-click="vm.sideBar();" data-ng-repeat="menu in vm.menuItems">

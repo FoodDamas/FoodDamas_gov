@@ -5,6 +5,33 @@ dashboard.controller("homeCtrl", function ($http, $scope, dashboardService, appS
     var vm = this;
     var apiBase = appSettings.apiBase;
 
+    vm.dateClick= function()
+    {
+        console.dir(vm.datePicker);
+    }
+
+    $('#datetimepicker1').datetimepicker(
+        {
+            defaultDate: new Date(),
+            calendarWeeks:true,
+            viewMode: 'days',
+            format: 'YYYY-MM-DD',
+            showTodayButton:true,
+            locale :'ko'
+
+        }
+    );
+    var datePicker ="";
+    $("#datetimepicker1").on("dp.change", function(e) {
+        alert($('#datePickerText').val());
+        datePicker = $('#datePickerText').val();
+        console.dir(datePicker);
+    });
+
+
+
+
+
     /*Init Box Info*/
     {
         dashboardService.getListTotal().then(function (data) {
@@ -44,16 +71,16 @@ dashboard.controller("homeCtrl", function ($http, $scope, dashboardService, appS
         vm.totalMemberByMonth = function () {
             var myRecor1 = $resource(apiBase + '/memberTotalByMonth');
             var myRecord = myRecor1.query(function () {
-                vm.myFunct(myRecord,"Month");
+                vm.myFunct(myRecord, "Month");
             });
         }
-        vm.totalMemberByDate = function(){
+        vm.totalMemberByDate = function () {
             var dateRecords = $resource(apiBase + '/memberTotalByDate');
-            var dateRecord = dateRecords.query(function(){
-                vm.myFunct(dateRecord,"Date");
+            var dateRecord = dateRecords.query(function () {
+                vm.myFunct(dateRecord, "Date");
             });
         }
-        vm.myFunct = function (data,xTitle) {
+        vm.myFunct = function (data, xTitle) {
             var dataArr = [];
             var labelArr = [];
             for (var i = 0; i < data.length - 1; i++) {
@@ -127,26 +154,25 @@ dashboard.controller("homeCtrl", function ($http, $scope, dashboardService, appS
     /*Bar Chart*/
     {
         var qnaChart = document.getElementById("qnaChart").getContext("2d");
-        vm.getCountQnAByMonth = function(){
+        vm.getCountQnAByMonth = function () {
             var monthRecords = $resource(apiBase + '/getCountQnAByMonth');
-            var monthRecord = monthRecords.query(function(){
+            var monthRecord = monthRecords.query(function () {
                 vm.barChartFunc(monthRecord);
             });
         }
-        vm.barChartFunc = function(data){
-            console.dir(data);
+        vm.barChartFunc = function (data) {
+           /* console.dir(data);*/
             var dataArrQuestion = [];
-            var dataArrAnswer =[];
+            var dataArrAnswer = [];
             var labelArr = [];
-            var maxBarValue =0;
-            for(var i=0;i<data.length;i++)
-            {
+            var maxBarValue = 0;
+            for (var i = 0; i < data.length; i++) {
                 dataArrQuestion.push(data[i].total_question);
                 dataArrAnswer.push(data[i].total_answer);
                 labelArr.push(data[i].regmonth);
-                maxBarValue +=data[i].total_question;
+                maxBarValue += data[i].total_question;
             }
-            var qnaBarChartDataConfig ={
+            var qnaBarChartDataConfig = {
                 labels: labelArr,
                 datasets: [
                     {
@@ -156,17 +182,17 @@ dashboard.controller("homeCtrl", function ($http, $scope, dashboardService, appS
                         data: dataArrQuestion
                     },
                     {
-                        label:'Answer',
+                        label: 'Answer',
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor:'rgba(54, 162, 235, 1)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
                         data: dataArrAnswer
                     }
                 ]
             }
-            var qnaRealBarChart = new Chart(qnaChart,{
+            var qnaRealBarChart = new Chart(qnaChart, {
                 type: 'bar',
-                data :qnaBarChartDataConfig,
-                options :{
+                data: qnaBarChartDataConfig,
+                options: {
                     responsive: true,
 
                     legend: {
