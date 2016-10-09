@@ -18,6 +18,33 @@ dashboard.service('dashboardService',['$http', '$q','apiServices',function($http
                     deferred.reject(response);
                 });
             return deferred.promise;
+        };
+        var updateFTState = function(param){
+            var deferred = $q.defer();
+            apiServices.update("updateState", param).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
+        };
+
+        var getHistorySale = function(param){
+            var deferred = $q.defer();
+            apiServices.getWithParam("historysale",param).then(function (response) {
+                    if (response)
+                        deferred.resolve(response);
+                    else
+                        deferred.reject("Something went wrong while processing your request. Please Contact Administrator.");
+                },
+                function (response) {
+                    deferred.reject(response);
+                });
+            return deferred.promise;
         }
         var getTotalListByDate = function(param){
             var deferred = $q.defer();
@@ -36,6 +63,8 @@ dashboard.service('dashboardService',['$http', '$q','apiServices',function($http
     {
         dashboardService.getListFTFull = getListFTFull;
         dashboardService.getTotalListByDate = getTotalListByDate;
+        dashboardService.getHistorySale = getHistorySale;
+        dashboardService.updateFTState= updateFTState;
     }
     /*End List FT*/
     /*QnA Service*/

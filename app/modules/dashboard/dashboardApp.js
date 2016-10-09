@@ -1,7 +1,7 @@
 /**
  * Created by Mr_Quang on 9/23/2016.
  */
-var dashboard = angular.module("dashboard", ['ngMaterial','angularModalService','angular-toArrayFilter','angularUtils.directives.dirPagination','ui.router', 'ngResource', 'ngAnimate','angular-md5','ngCookies']);
+var dashboard = angular.module("dashboard", ['ui.bootstrap','ngMaterial','angularModalService','angular-toArrayFilter','angularUtils.directives.dirPagination','ui.router', 'ngResource', 'ngAnimate','angular-md5','ngCookies']);
 
 dashboard.config(["$stateProvider","$mdDateLocaleProvider",function ($stateProvider,$mdDateLocaleProvider,$scope) {
 

@@ -5,10 +5,9 @@ dashboard.controller("TotalViewCtrl",function($scope,$location,$anchorScroll,das
     var vm = this;
     $scope.totalviewpageSize =5;
     {
-
         vm.dateClick= function()
         {
-            console.dir(moment(vm.myDate).format('YYYY-MM-DD'));
+            //console.dir(moment(vm.myDate).format('YYYY-MM-DD'));
             vm.getListTotalByDate(moment(vm.myDate).format('YYYY-MM-DD'));
         }
         vm.myDate = new Date();
@@ -83,5 +82,5 @@ dashboard.controller("TotalViewCtrl",function($scope,$location,$anchorScroll,das
         /* vm.getListTotalByDate("2016-09-21");*/
 
     }
-    console.dir("Total View........");
+    //console.dir("Total View........");
 });

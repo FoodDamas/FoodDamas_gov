@@ -27,3 +27,11 @@
 #TotalListTable td{
     border: 1px solid #8a6d3b;
 }
+#InfoContent span{
+    margin-left:1em;
+    font-size: large;
+}
+#InfoContent label{
+    color:blue;
+    font-weight: bold;
+}
