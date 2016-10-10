@@ -1,9 +1,11 @@
 /**
  * Created by Mr_Quang on 9/25/2016.
  */
-ftview.controller("ftviewCtrl",['$state',function($state){
+ftview.controller("ftviewCtrl",function($scope,$cookies,$state){
     var vm = this;
     console.log("ftview ctrl ............");
+    $scope.checkUserLogin =$cookies.get("foodtruckUser");
+    console.dir($scope.checkUserLogin);
     vm.menu =[
         {
             title:'Home',
@@ -24,5 +26,10 @@ ftview.controller("ftviewCtrl",['$state',function($state){
             $("#navbarMenu").click();
         }
     }
+    vm.loginClick = function(){
 
-}]);
+        $state.go("home.login");
+
+
+    }
+});

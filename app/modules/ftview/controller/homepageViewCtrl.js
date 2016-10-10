@@ -3,5 +3,5 @@
  */
 view.controller("homepageViewCtrl",function($http, $scope,$resource,appSettings){
     var vm = this;
-    console.log("home page ............");
+    //console.log("home page ............");
 });

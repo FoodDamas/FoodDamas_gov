@@ -26,7 +26,9 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                            <a ng-hide="checkUserLogin"
+                               ng-click="vm.loginClick()"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                            <a ng-show="checkUserLogin">{{checkUserLogin}}</a>
                         </li>
                     </ul>
                 </div>
@@ -36,25 +38,27 @@
         </div>
     </nav>
     <!--End Top Navbar-->
-    <div class="main_content">
+    <div>
         <div style="min-height: 100vh;">
                 <ui-view></ui-view>
         </div>
     </div>
     <!-- Footer -->
-    <footer>
-        <div class="row">
-           <!-- <hr>-->
-            <div class="col-lg-12">
-                <div class="col-md-8">
+    <!--<footer class="bg-black-gradient" style="min-height: 10vh;">
+        Copy right
+
+    &lt;!&ndash;    <div class="row">
+           &lt;!&ndash; <hr>&ndash;&gt;
+            <div class="col-md-12 bg-black-gradient"  style="height: 10vh;">
+                <div class="col-md-8 col-xs-12">
                     <a href="#">Terms of Service</a> | <a href="#">Privacy</a>
                 </div>
-                <div class="col-md-4">
+                &lt;!&ndash;<div class="col-md-4 col-xs-12">
                     <p class="muted pull-right">© 2013 Company Name. All rights reserved</p>
-                </div>
+                </div>&ndash;&gt;
             </div>
-        </div>
+        </div>&ndash;&gt;
     </footer>
-
+-->
 </div>
 </div>

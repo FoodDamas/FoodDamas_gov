@@ -13,6 +13,14 @@ view.config(["$stateProvider", function ($stateProvider) {
         authenticate: false,
         adminsite :false
     });
+    $stateProvider.state('home.login', {
+        url: '/login',
+        templateUrl: 'app/modules/ftview/views/loginPage.html',
+        controller: 'ftLoginCtrl',
+        controllerAs: 'vm',
+        authenticate: false,
+        adminsite :false
+    });
     $stateProvider.state('home.qna', {
         url: '/QnAView',
         templateUrl: 'app/modules/ftview/views/qnaView.html',
