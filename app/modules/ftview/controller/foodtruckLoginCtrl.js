@@ -5,6 +5,10 @@ view.controller("ftLoginCtrl",function($http,$state, $scope,$resource,appSetting
     var vm =this;
     var apiBase = appSettings.apiBase;
     vm.errorMsg='';
+    if($cookies.get("foodtruckUser"))
+    {
+        $state.go("home");
+    }
     vm.checkFT = function(){
         console.dir(vm.getUser);
         var myReturn = $resource(apiBase + '/ftLogin');
@@ -21,7 +25,7 @@ view.controller("ftLoginCtrl",function($http,$state, $scope,$resource,appSetting
                 var date = new Date();
                 date.setTime(date.getTime()+(24*60*60*1000));
                 $cookies.put("foodtruckUser",id,{expires:date});
-                $state.go("home.homepage");
+                $state.reload();
             }
            // vm.noticeResult = myNoticeRecord;
         });

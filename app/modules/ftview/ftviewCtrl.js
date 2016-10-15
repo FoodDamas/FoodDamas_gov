@@ -4,8 +4,16 @@
 ftview.controller("ftviewCtrl",function($scope,$cookies,$state){
     var vm = this;
     console.log("ftview ctrl ............");
+
     $scope.checkUserLogin =$cookies.get("foodtruckUser");
-    console.dir($scope.checkUserLogin);
+
+
+    vm.userLogout = function(){
+        console.dir($cookies.get("foodtruckUser"));
+        $cookies.remove("foodtruckUser");
+        $state.reload();
+    }
+
     vm.menu =[
         {
             title:'Home',

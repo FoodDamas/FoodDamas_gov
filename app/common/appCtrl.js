@@ -3,8 +3,8 @@
  */
 
 
-app.controller("appCtrl", ['$rootScope', '$scope', '$state', '$location', 'Flash','appSettings',
-function ($rootScope, $scope, $state, $location, Flash,appSettings){
+app.controller("appCtrl", ['$rootScope', '$scope', '$state', '$location', 'Flash','appSettings','$cookies',
+function ($rootScope, $scope, $state, $location, Flash,appSettings,$cookies){
     var vm =this;
 
 
@@ -35,6 +35,11 @@ function ($rootScope, $scope, $state, $location, Flash,appSettings){
             state:"notice"
         }
     ];
+    vm.signOut = function(){
+
+        $cookies.remove("user");
+        $state.go("login");
+    }
     //controll sidebar open & close in mobile and normal view
     vm.sideBar = function (value) {
         if($(window).width()<=767){
